@@ -7,4 +7,6 @@ import {Component} from '@angular/core'
         './header.component.css'
     ]
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+    private title: string = 'Aprendendo Inglês'
+}

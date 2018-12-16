@@ -5,14 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HeaderComponent} from './header/header.component';
 import { PanelComponent } from './panel/panel.component';
-import { AttemptsComponent } from './attempts/attempts.component'
+import { AttemptsComponent } from './attempts/attempts.component';
+import { ProgressComponent } from './progress/progress.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PanelComponent,
-    AttemptsComponent
+    AttemptsComponent,
+    ProgressComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,7 @@ export class PanelComponent implements OnInit {
   public counter: number = 0
   public progress: number = 0
   public response: string = ''
+  public attempts: number = 3
 
   constructor() { 
     this.ratios = []
@@ -61,6 +62,12 @@ export class PanelComponent implements OnInit {
 
       if(!this.setCurrentPhrase()) {
         console.log('Jogo ganho!!!')
+      }
+    } else {
+      this.attempts--
+
+      if(this.attempts === -1) {
+        console.log('Você perdeu todas as tentativas')
       }
     }
   }

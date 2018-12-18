@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {Phrase} from '../shared/phrase.model'
 import PHRASES from './phrases-mock'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-panel',
@@ -17,6 +16,7 @@ export class PanelComponent implements OnInit {
   public currentPhrase: Phrase
   public response: string
   public counter: number = 0
+  public progress: number = 0
 
   constructor() { 
     this.ratios = []
@@ -53,6 +53,11 @@ export class PanelComponent implements OnInit {
   public verifyResponse(): void {
     if(this.response === this.currentPhrase.portuguesePhrase) {
       this.counter++
+
+      if(this.progress < 100) {
+        this.progress += (100 / this.ratios.length)
+      }
+
       if(!this.setCurrentPhrase()) {
         console.log('Jogo ganho!!!')
       }

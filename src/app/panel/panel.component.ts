@@ -14,9 +14,9 @@ export class PanelComponent implements OnInit {
   public currentIndex: number
   public ratios: Array<number>
   public currentPhrase: Phrase
-  public response: string
   public counter: number = 0
   public progress: number = 0
+  public response: string = ''
 
   constructor() { 
     this.ratios = []
@@ -53,6 +53,7 @@ export class PanelComponent implements OnInit {
   public verifyResponse(): void {
     if(this.response === this.currentPhrase.portuguesePhrase) {
       this.counter++
+      this.response = ''
 
       if(this.progress < 100) {
         this.progress += (100 / this.ratios.length)

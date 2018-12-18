@@ -14,4 +14,9 @@ export class AppComponent {
     this.gameInProgress = false
     this.closureType = type
   }
+
+  public restartGame(): void {
+    this.gameInProgress = true
+    this.closureType = undefined
+  }
 }

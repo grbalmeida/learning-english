@@ -1,2 +1,26 @@
 <app-header></app-header>
-<app-panel></app-panel>
+<div *ngIf="gameInProgress; else gameOver">
+    <app-panel (closeGame)="closeGame($event)"></app-panel>
+</div>
+<ng-template #gameOver>
+    <div *ngIf="closureType === 'defeat'; else endGameWin" class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col">
+                <h3 style="color: red">
+                    Fim de jogo, infelizmente você perdeu :S
+                </h3>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #endGameWin>
+    <div class="container" style="margin-top: 50px">
+        <div class="row">
+            <div class="col">
+                <h3 style="color: green">
+                    Fim de jogo, você ganhou :D
+                </h3>
+            </div>
+        </div>
+    </div>
+</ng-template>

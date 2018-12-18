@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'learning-english';
+  public gameInProgress: boolean = true
+  public closureType: string
+
+  public closeGame(type: string): void {
+    this.gameInProgress = false
+    this.closureType = type
+  }
 }

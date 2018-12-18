@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core'
+import {Component, OnInit, EventEmitter, Output} from '@angular/core'
 import {Phrase} from '../shared/phrase.model'
 import PHRASES from './phrases-mock'
 
@@ -18,6 +18,7 @@ export class PanelComponent implements OnInit {
   public progress: number = 0
   public response: string = ''
   public attempts: number = 3
+  @Output() public closeGame: EventEmitter<string> = new EventEmitter()
 
   constructor() { 
     this.ratios = []
@@ -61,13 +62,13 @@ export class PanelComponent implements OnInit {
       }
 
       if(!this.setCurrentPhrase()) {
-        console.log('Jogo ganho!!!')
+        this.closeGame.emit('victory')
       }
     } else {
       this.attempts--
 
       if(this.attempts === -1) {
-        console.log('Você perdeu todas as tentativas')
+        this.closeGame.emit('defeat')
       }
     }
   }

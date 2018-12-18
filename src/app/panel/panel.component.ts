@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import {Phrase} from '../shared/phrase.model'
 import PHRASES from './phrases-mock'
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-panel',
@@ -15,35 +16,34 @@ export class PanelComponent implements OnInit {
   public ratios: Array<number>
   public currentPhrase: Phrase
   public response: string
+  public counter: number = 0
 
   constructor() { 
     this.ratios = []
-    this.setCurrentIndex()
+    this.generateRandomIndexes()
     this.setCurrentPhrase()
   }
 
   ngOnInit() {
   }
 
-  public getRandomIndex(): number {
-    const min = 0
-    const max = this.phrases.length - 1
-    const newIndex: number = Math.floor(Math.random() * max) + min
+  public generateRandomIndexes(): void {
+    while(this.ratios.length !== this.phrases.length) {
+      const random = Math.floor(Math.random() * this.phrases.length)
 
-    if(!this.ratios.includes(newIndex)) {
-      this.ratios.push(newIndex)
-      return newIndex
+      if(!this.ratios.includes(random)) {
+        this.ratios.push(random)
+      }
     }
-
-    this.getRandomIndex()
   }
 
-  public setCurrentPhrase(): void {
-    this.currentPhrase = this.phrases[this.currentIndex]
-  }
-
-  public setCurrentIndex(): void {
-    this.currentIndex = this.getRandomIndex()
+  public setCurrentPhrase(): boolean {
+    const currentPhrase = this.phrases[this.ratios[this.counter]]
+    if(currentPhrase !== undefined) {
+      this.currentPhrase = this.phrases[this.ratios[this.counter]]
+      return true
+    }
+    return false
   }
 
   public updateResponse(response: Event): void {
@@ -51,6 +51,11 @@ export class PanelComponent implements OnInit {
   } 
 
   public verifyResponse(): void {
-
+    if(this.response === this.currentPhrase.portuguesePhrase) {
+      this.counter++
+      if(!this.setCurrentPhrase()) {
+        console.log('Jogo ganho!!!')
+      }
+    }
   }
 }

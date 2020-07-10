@@ -7,16 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'learning-english';
-  public gameInProgress: boolean = true
-  public closureType: string
+  public gameInProgress = true;
+  public closureType: string;
 
   public closeGame(type: string): void {
-    this.gameInProgress = false
-    this.closureType = type
+    this.gameInProgress = false;
+    this.closureType = type;
   }
 
   public restartGame(): void {
-    this.gameInProgress = true
-    this.closureType = undefined
+    this.gameInProgress = true;
+    this.closureType = undefined;
   }
 }

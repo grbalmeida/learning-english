@@ -1,5 +1,6 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import {Heart} from '../shared/heart.model'
+
+import {Heart} from '../shared/heart.model';
 
 @Component({
   selector: 'app-attempts',
@@ -7,12 +8,12 @@ import {Heart} from '../shared/heart.model'
   styleUrls: ['./attempts.component.css']
 })
 export class AttemptsComponent implements OnInit, OnChanges {
-  @Input() public attempts: number
+  @Input() public attempts: number;
   public hearts: Array<Heart> = [
     new Heart(true),
     new Heart(true),
     new Heart(true)
-  ]
+  ];
 
   constructor() { }
 
@@ -20,10 +21,10 @@ export class AttemptsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if(this.attempts !== this.hearts.length) {
-      let index = this.hearts.length - this.attempts
+    if (this.attempts !== this.hearts.length) {
+      const index = this.hearts.length - this.attempts;
 
-      this.hearts[index - 1].full = false
+      this.hearts[index - 1].full = false;
     }
   }
 }

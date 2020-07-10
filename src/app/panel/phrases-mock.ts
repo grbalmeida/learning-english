@@ -1,4 +1,4 @@
-import {Phrase} from '../shared/phrase.model'
+import {Phrase} from '../shared/phrase.model';
 
 const PHRASES: Array<Phrase> = [
     {englishPhrase: 'I like to learn', portuguesePhrase: 'Eu gosto de aprender'},
@@ -20,6 +20,6 @@ const PHRASES: Array<Phrase> = [
     {englishPhrase: 'Is there anything good on TV?', portuguesePhrase: 'Tem alguma coisa boa na TV?'},
     {englishPhrase: 'I\'m going to bed', portuguesePhrase: 'Eu vou para a cama'},
     {englishPhrase: 'Good night. Sweet dreams.', portuguesePhrase: 'Boa noite. Bons sonhos.'}
-]
+];
 
-export default PHRASES
+export default PHRASES;

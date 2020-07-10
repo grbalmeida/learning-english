@@ -1,6 +1,6 @@
-import {Component, OnInit, EventEmitter, Output} from '@angular/core'
-import {Phrase} from '../shared/phrase.model'
-import PHRASES from './phrases-mock'
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
+import {Phrase} from '../shared/phrase.model';
+import PHRASES from './phrases-mock';
 
 @Component({
   selector: 'app-panel',
@@ -9,66 +9,66 @@ import PHRASES from './phrases-mock'
 })
 export class PanelComponent implements OnInit {
 
-  public instruction: string = 'Traduza a frase:'
-  public phrases: Array<Phrase> = PHRASES
-  public currentIndex: number
-  public ratios: Array<number>
-  public currentPhrase: Phrase
-  public counter: number = 0
-  public progress: number = 0
-  public response: string = ''
-  public attempts: number = 3
-  @Output() public closeGame: EventEmitter<string> = new EventEmitter()
+  public instruction = 'Traduza a frase:';
+  public phrases: Array<Phrase> = PHRASES;
+  public currentIndex: number;
+  public ratios: Array<number>;
+  public currentPhrase: Phrase;
+  public counter = 0;
+  public progress = 0;
+  public response = '';
+  public attempts = 3;
+  @Output() public closeGame: EventEmitter<string> = new EventEmitter();
 
-  constructor() { 
-    this.ratios = []
-    this.generateRandomIndexes()
-    this.setCurrentPhrase()
+  constructor() {
+    this.ratios = [];
+    this.generateRandomIndexes();
+    this.setCurrentPhrase();
   }
 
   ngOnInit() {
   }
 
   public generateRandomIndexes(): void {
-    while(this.ratios.length !== this.phrases.length) {
-      const random = Math.floor(Math.random() * this.phrases.length)
+    while (this.ratios.length !== this.phrases.length) {
+      const random = Math.floor(Math.random() * this.phrases.length);
 
-      if(!this.ratios.includes(random)) {
-        this.ratios.push(random)
+      if (!this.ratios.includes(random)) {
+        this.ratios.push(random);
       }
     }
   }
 
   public setCurrentPhrase(): boolean {
-    const currentPhrase = this.phrases[this.ratios[this.counter]]
-    if(currentPhrase !== undefined) {
-      this.currentPhrase = this.phrases[this.ratios[this.counter]]
-      return true
+    const currentPhrase = this.phrases[this.ratios[this.counter]];
+    if (currentPhrase !== undefined) {
+      this.currentPhrase = this.phrases[this.ratios[this.counter]];
+      return true;
     }
-    return false
+    return false;
   }
 
   public updateResponse(response: Event): void {
-    this.response = ((<HTMLInputElement>response.target)).value
-  } 
+    this.response = ((<HTMLInputElement>response.target)).value;
+  }
 
   public verifyResponse(): void {
-    if(this.response === this.currentPhrase.portuguesePhrase) {
-      this.counter++
-      this.response = ''
+    if (this.response === this.currentPhrase.portuguesePhrase) {
+      this.counter++;
+      this.response = '';
 
-      if(this.progress < 100) {
-        this.progress += (100 / this.ratios.length)
+      if (this.progress < 100) {
+        this.progress += (100 / this.ratios.length);
       }
 
-      if(!this.setCurrentPhrase()) {
-        this.closeGame.emit('victory')
+      if (!this.setCurrentPhrase()) {
+        this.closeGame.emit('victory');
       }
     } else {
-      this.attempts--
+      this.attempts--;
 
-      if(this.attempts === -1) {
-        this.closeGame.emit('defeat')
+      if (this.attempts === -1) {
+        this.closeGame.emit('defeat');
       }
     }
   }
